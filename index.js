@@ -2,7 +2,7 @@ const { Pool, Client } = require('pg')
 const express = require('express');
 const path = require('path')
 const bodyParser = require('body-parser')
-
+const social = require('./JsonData/social_response_log')
 
 const app = express();
 const publicDirectoryPath = path.join(__dirname, '/views')
@@ -17,30 +17,22 @@ app.use(bodyParser.json())
 const client = new Client({
   user: 'postgres',
   host: 'localhost',
-  database: 'Test',
+  database: 'CircleOneSocialDB',
   password: 'root',
   port: 5432,
 })
 client.connect()
-app.get('',(req ,res)=>{
-  res.render('index');
-  res.send("HELLO"+req.body);
-})
-
-app.get('/create',(req ,res)=>{
-  client.query(`CREATE TABLE test(
-        AgentId int,
-        UserName varchar(255),
-        Password varchar(255))`,(err, res) => {
-        console.log(err, res)
-        client.end()
-    })
-    res.send("Create")
-})
 
 app.post('/insert',(req ,res)=>{
-    const user = req.body;
-    client.query(`insert into test (agentid, username , password ) values (${user.agentid} ,'${user.username}', '${user.password}')`,(err, res) => {
+    const user = social[0];
+    // console.log(`${user.id}`)
+    // const user = req.body;
+    client.query(`insert into social_response_log values (
+      ${user.id}, ${user.social_inbox_id}, ${user.created_by},
+      '${user.created_on}', '${user.message}', '${user.image_link}',
+      '${user.remark}', ${user.customer_id}, ${user.work_queue_log_id},
+      ${user.status}, ${user.modified_by}, '${user.modified_on}' )` ,
+      (err, res) => {
         console.log(err, res)
         client.end()
     })

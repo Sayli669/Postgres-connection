@@ -1,0 +1,14 @@
+  [{
+    "id" : 1,
+    "social_inbox_id" : 112980,
+    "created_by" : 1129801,
+    "created_on" : "2020-01-14T11:17:26+0000",
+    "message" : "comments for test",
+    "image_link" : "https://www.google.com",
+    "remark" : "",
+    "customer_id" :90209332,
+    "work_queue_log_id" : 190209332,
+    "status" : 1 ,
+    "modified_by" : 20011411 ,
+    "modified_on" : "2020-01-14T11:17:26+0000"
+  }]
